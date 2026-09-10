@@ -1,0 +1,41 @@
+{
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "homepage": "https://fxmacrodata.com",
+  "license": "MIT",
+  "files": [
+    "index.ts",
+    "src/",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "bun test test",
+    "build": "bun build index.ts --target browser --external gloomberb --external react --outdir dist"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3",
+    "@types/node": "^24.10.9",
+    "tsx": "^4.21.0",
+    "gloomberb": "0.13.3",
+    "@types/react": "^19.2.0",
+    "@types/bun": "^1.3.0",
+    "react": "19.2.7"
+  },
+  "name": "gloomberb-fxmacrodata",
+  "main": "index.ts",
+  "description": "FXMacroData research panes and public API tools for Gloomberb",
+  "peerDependencies": {
+    "gloomberb": ">=0.13.3",
+    "react": "^19.2.0"
+  },
+  "dependencies": {
+    "ajv": "^8.17.1",
+    "@modelcontextprotocol/sdk": "1.30.0"
+  },
+  "overrides": {
+    "react": "19.2.7"
+  }
+}
