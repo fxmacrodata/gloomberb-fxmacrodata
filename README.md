@@ -1,8 +1,10 @@
 # FXMacroData for Gloomberb
 
-Research macroeconomic observations and release calendars in Gloomberb with [FXMacroData](https://fxmacrodata.com/?utm_source=github&utm_medium=referral&utm_campaign=open_source_integrations&utm_content=gloomberb_readme).
+Research macroeconomic conditions in Gloomberb with [FXMacroData](https://fxmacrodata.com/?utm_source=github&utm_medium=referral&utm_campaign=open_source_integrations&utm_content=gloomberb_readme): chart indicator histories, inspect upcoming releases and query market data in native research panes.
 
-The USD catalogue, USD indicator history and USD release calendar are always free and need no API key, account or credit card. Additional access is optional.
+[Subscribe to FXMacroData](https://fxmacrodata.com/subscribe?utm_source=github&utm_medium=referral&utm_campaign=open_source_integrations&utm_content=gloomberb_subscribe) for non-USD data, full available history, FX, commodities and positioning. Use the public USD workflow to evaluate the integration before connecting your subscription.
+
+Evaluate the plugin with the public USD catalogue, recent indicator history and release calendar without an API key. Connect your subscription when you need protected datasets or full available history.
 
 ## Install
 
@@ -34,7 +36,7 @@ gloomberb api invoke fxmacrodata.rest_indicator_history '{"currency":"usd","indi
 
 Use `gloomberb catalog` and `gloomberb api list` to discover input options. Empty windows stay empty. The event-stream operation collects a finite snapshot, bounded by `max_events` (1–100) and `max_seconds` (1–60), then closes the stream. It does not create a background subscription.
 
-## Optional access
+## Connect your FXMacroData subscription
 
 Run **FXMacroData: configure optional API key** in the command bar. The password input keeps the key only in memory for the current plugin session. Restarting or disabling the plugin clears it; enter it again when needed. A blank input selects public access for the session, including when an environment key exists. Changing access cancels requests using the previous connection.
 
