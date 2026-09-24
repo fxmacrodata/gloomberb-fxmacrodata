@@ -8,7 +8,7 @@ Evaluate the plugin with the public USD catalogue, recent indicator history and 
 
 ## Install
 
-Use Gloomberb 0.13.3 or newer in the desktop app or terminal. Install this [native plugin](https://github.com/fxmacrodata/gloomberb-fxmacrodata) with:
+Use Gloomberb 0.15.0 or newer in the desktop app or terminal. Install this [native plugin](https://github.com/fxmacrodata/gloomberb-fxmacrodata) with:
 
 ```sh
 gloomberb install fxmacrodata/gloomberb-fxmacrodata

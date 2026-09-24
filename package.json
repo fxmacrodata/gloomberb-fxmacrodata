@@ -28,7 +28,7 @@
   "main": "index.ts",
   "description": "FXMacroData research panes and public API tools for Gloomberb",
   "peerDependencies": {
-    "gloomberb": ">=0.13.3",
+    "gloomberb": ">=0.15.0",
     "react": "^19.2.0"
   },
   "dependencies": {
