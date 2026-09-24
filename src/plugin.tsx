@@ -1,8 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { GloomPlugin, HeadlessPaneDefinition, PaneProps, PaneSettingField, PaneSettingsDef, WizardStep } from 'gloomberb/types/plugin';
 import { useAppSelector, useShortcut } from 'gloomberb/react';
-import { DataTableView, useExternalLinkFooter } from 'gloomberb/components';
-import { Box, Text } from 'gloomberb/ui';
+import { Button, DataTableView, PaneStatusBody, QueryBar, loadingText, unavailableText, usePaneStatusLinkFooter } from 'gloomberb/components';
 import { operations, remoteTools, parseFields, fieldSchema, type Arguments, type Schema } from './contract';
 import { restQuery, WEBSITE } from './rest-client';
 import { mcpQuery } from './mcp-client';
@@ -77,18 +76,25 @@ function ResearchPane({ paneId, focused, width, height }: PaneProps) {
   const [refresh, setRefresh] = useState(0);
   const [result, setResult] = useState<ResearchResult | null>(null);
   const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [sectionIndex, setSectionIndex] = useState(0);
   const [selected, setSelected] = useState<number | null>(null);
   const [sortColumn, setSortColumn] = useState<string | null>(null);
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
   const signature = JSON.stringify(parameters);
+  const loaded = useRef('');
   useEffect(() => {
     const controller = new AbortController();
     const entry = entries.find(entry => entry.id === id);
-    if (!entry) { setError('Unknown operation.'); return; }
-    setLoading(true); setError(''); setResult(null); setSectionIndex(0);
-    void loadResearch(entry, parameters, controller.signal).then(data => { if (!controller.signal.aborted) setResult(data); })
+    if (!entry) { setError('Unknown operation.'); setLoading(false); return; }
+    // A refresh keeps the current table until the new result arrives; new parameters start empty.
+    const key = `${id}\n${signature}`;
+    setLoading(true); setError('');
+    if (loaded.current !== key) { setResult(null); setSectionIndex(0); }
+    void loadResearch(entry, parameters, controller.signal).then(data => {
+      if (controller.signal.aborted) return;
+      loaded.current = key; setResult(data); setSectionIndex(index => Math.min(index, Math.max(0, data.sections.length - 1)));
+    })
       .catch(() => { if (!controller.signal.aborted) setError('Request unavailable. Check parameters and optional access in FXMacroData settings.'); })
       .finally(() => { if (!controller.signal.aborted) setLoading(false); });
     return () => controller.abort();
@@ -99,22 +105,23 @@ function ResearchPane({ paneId, focused, width, height }: PaneProps) {
     if (event.name === ']') setSectionIndex(index => Math.min(index + 1, (result?.sections.length ?? 1) - 1));
     if (event.name === '[') setSectionIndex(index => Math.max(0, index - 1));
   }, { enabled: focused });
-  useExternalLinkFooter({ registrationId: 'fxmacrodata', focused, url: WEBSITE, source: 'FXMacroData',
-    info: loading ? [{ id: 'loading', parts: [{ text: 'Loading', tone: 'muted' }] }] : error ? [{ id: 'error', parts: [{ text: error, tone: 'warning' }] }] : [],
-    hints: [{ id: 'refresh', key: 'r', label: 'refresh', onPress: () => setRefresh(value => value + 1) }, { id: 'sections', key: '[ ]', label: 'section' }],
-  });
+  // `r` refreshes every pane, so it has no footer hint; sections switch from the query bar or `[` and `]`.
+  usePaneStatusLinkFooter({ registrationId: 'fxmacrodata', focused, url: WEBSITE, source: 'FXMacroData', loading, error: error || null, showOpenHint: true });
   const section = result?.sections[sectionIndex];
   const columns = (section?.columns ?? []).map(column => ({ id: column.key, label: column.header, width: Math.max(18, Math.min(44, column.header.length + 4)), align: 'left' as const }));
   const rows = [...(section?.rows ?? [])];
   if (sortColumn) rows.sort((a, b) => displayValue(a[sortColumn]).localeCompare(displayValue(b[sortColumn]), undefined, { numeric: true }) * (sortDirection === 'asc' ? 1 : -1));
-  return <Box flexDirection="column" width={width} height={height}>
-    <Text>{section ? `${section.title} (${sectionIndex + 1}/${result?.sections.length})` : loading ? 'Loading FXMacroData…' : error || 'No data available'}</Text>
-    <DataTableView focused={focused} rootWidth={width} rootHeight={Math.max(1, height - 1)} columns={columns} items={rows}
-      sortColumnId={sortColumn} sortDirection={sortDirection} onHeaderClick={column => { setSortColumn(column); setSortDirection(sortColumn === column && sortDirection === 'asc' ? 'desc' : 'asc'); }}
-      selection={{ kind: 'index', selectedIndex: selected, onChange: index => setSelected(index) }}
-      getItemKey={(_, index) => String(index)} renderCell={(row, column) => ({ text: displayCell(column.id, row[column.id]) })}
-      emptyStateTitle={loading ? 'Loading' : error || 'No observations in this window'} />
-  </Box>;
+  // The footer carries the error text; the body says nothing loaded and offers a retry.
+  if (!result) return <PaneStatusBody loading={loading} loadingLabel={loadingText('FXMacroData results')} error={error ? unavailableText('FXMacroData results') : null}
+    actions={<Button label="Try again" onPress={() => setRefresh(value => value + 1)} />} />;
+  const sections = result.sections;
+  return <DataTableView focused={focused} rootWidth={width} rootHeight={height} columns={columns} items={rows}
+    rootBefore={sections.length > 1 ? <QueryBar width={width} filters={[{ id: 'section', label: 'Section', value: String(sectionIndex),
+      options: sections.map((item, index) => ({ value: String(index), label: item.title })), onChange: value => setSectionIndex(Number(value)) }]} /> : undefined}
+    sortColumnId={sortColumn} sortDirection={sortDirection} onHeaderClick={column => { setSortColumn(column); setSortDirection(sortColumn === column && sortDirection === 'asc' ? 'desc' : 'asc'); }}
+    selection={{ kind: 'index', selectedIndex: selected, onChange: index => setSelected(index) }}
+    getItemKey={(_, index) => String(index)} renderCell={(row, column) => ({ text: displayCell(column.id, row[column.id]) })}
+    emptyStateTitle="No observations in this window" />;
 }
 
 export const fxmacrodataPlugin: GloomPlugin = {
