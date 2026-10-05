@@ -19,7 +19,7 @@
     "typescript": "^5.9.3",
     "@types/node": "^24.10.9",
     "tsx": "^4.21.0",
-    "gloomberb": "0.13.3",
+    "gloomberb": "0.15.2",
     "@types/react": "^19.2.0",
     "@types/bun": "^1.3.0",
     "react": "19.2.7"
