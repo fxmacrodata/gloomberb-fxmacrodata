@@ -2,7 +2,7 @@
   "id": "fxmacrodata",
   "name": "FXMacroData",
   "tagline": "Macroeconomic calendars, indicator charts and research tools",
-  "description": "Native macroeconomic tables, indicator charts and research tools backed by https://fxmacrodata.com/. The public USD workflow requires no key. Source: https://github.com/fxmacrodata/gloomberb-fxmacrodata.",
+  "description": "Native macroeconomic tables, indicator charts and research tools backed by https://fxmacrodata.com/?utm_source=gloomberb&utm_medium=integration&utm_campaign=gloomberb-fxmacrodata&utm_content=homepage. The public USD workflow requires no key. Source: https://github.com/fxmacrodata/gloomberb-fxmacrodata.",
   "categories": ["macro", "data"],
   "targets": ["cli", "tui", "desktop"],
   "hosts": ["api.fxmacrodata.com", "mcp.fxmacrodata.com"],

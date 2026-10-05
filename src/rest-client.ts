@@ -3,7 +3,7 @@ import { redactMcpResponse, redactSecrets } from './redaction';
 
 export const API_ORIGIN = 'https://api.fxmacrodata.com';
 export const MCP_URL = 'https://mcp.fxmacrodata.com/mcp';
-export const WEBSITE = 'https://fxmacrodata.com/?utm_source=gloomberb&utm_medium=integration&utm_campaign=open_source_integrations&utm_content=app';
+export const WEBSITE = 'https://fxmacrodata.com/?utm_source=gloomberb&utm_medium=integration&utm_campaign=gloomberb-fxmacrodata&utm_content=app';
 export class PublicRequestError extends Error {}
 export type Fetch = (input: RequestInfo | URL, init?: RequestInit) => Promise<Response>;
 

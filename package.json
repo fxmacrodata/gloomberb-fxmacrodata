@@ -2,7 +2,7 @@
   "version": "0.1.0",
   "type": "module",
   "private": true,
-  "homepage": "https://fxmacrodata.com",
+  "homepage": "https://fxmacrodata.com/?utm_source=npm&utm_medium=referral&utm_campaign=gloomberb-fxmacrodata&utm_content=homepage",
   "license": "MIT",
   "files": [
     "index.ts",

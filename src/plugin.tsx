@@ -119,7 +119,7 @@ function ResearchPane({ paneId, focused, width, height }: PaneProps) {
 
 export const fxmacrodataPlugin: GloomPlugin = {
   id: 'fxmacrodata', name: 'FXMacroData', version: '0.1.0', toggleable: true,
-  description: 'Macroeconomic observations, release calendars and currency research.', homepage: 'https://fxmacrodata.com', targets: ['cli', 'tui', 'desktop'],
+  description: 'Macroeconomic observations, release calendars and currency research.', homepage: 'https://fxmacrodata.com/?utm_source=gloomberb&utm_medium=integration&utm_campaign=gloomberb-fxmacrodata&utm_content=homepage', targets: ['cli', 'tui', 'desktop'],
   panes: [{ id: 'fxmacrodata-research', name: 'FXMacroData Research', component: ResearchPane, defaultPosition: 'right', tableExport: true,
     settings: context => settings(entries.find(entry => entry.id === context.settings.operation) ?? entries.find(entry => entry.id === 'rest_data_catalogue')!, context.settings),
     portableShare: { private: { settings: ['parameters'] } },
