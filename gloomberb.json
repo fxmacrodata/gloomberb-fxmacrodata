@@ -6,5 +6,5 @@
   "categories": ["macro", "data"],
   "targets": ["cli", "tui", "desktop"],
   "hosts": ["api.fxmacrodata.com", "mcp.fxmacrodata.com"],
-  "minGloomberb": "0.13.3"
+  "minGloomberb": "0.15.0"
 }

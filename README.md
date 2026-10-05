@@ -8,7 +8,7 @@ Evaluate the plugin with the public USD catalogue, recent indicator history and 
 
 ## Install
 
-Use Gloomberb 0.13.3 or newer in the desktop app or terminal. Install this [native plugin](https://github.com/fxmacrodata/gloomberb-fxmacrodata) with:
+Use Gloomberb 0.15.0 or newer in the desktop app or terminal. Install this [native plugin](https://github.com/fxmacrodata/gloomberb-fxmacrodata) with:
 
 ```sh
 gloomberb install fxmacrodata/gloomberb-fxmacrodata
@@ -20,7 +20,7 @@ Third-party plugins run in the desktop and terminal clients. The hosted web app 
 
 ## Use
 
-Open the command bar and choose **FXMacroData: USD release calendar**. The table keeps confirmed release timestamps and source fields. Announcement epochs display as UTC times while JSON retains the original values. Select any **FXMacroData** research pane to query the other REST operations or hosted MCP tools. Parameter forms show the contract's fields; optional blank fields use the endpoint defaults. Edit parameters through the pane settings. `r` refreshes, `[` and `]` switch result sections, and column headings sort the current table. The source footer opens FXMacroData.
+Open the command bar and choose **FXMacroData: USD release calendar**. The table keeps confirmed release timestamps and source fields. Announcement epochs display as UTC times while JSON retains the original values. Select any **FXMacroData** research pane to query the other REST operations or hosted MCP tools. Parameter forms show the contract's fields; optional blank fields use the endpoint defaults. Edit parameters through the pane settings. When a result has several sections, choose one from the **Section** menu above the table or with `[` and `]`. `r` refreshes and keeps the current table until the new result arrives. Column headings sort the current table. `o` or the source footer opens FXMacroData.
 
 For macro charts, choose **FXMacroData macro indicators** in Gloomberb's chart-series picker. Search a currency followed by the indicator name, for example `usd inflation`, or use the series ID `usd/policy_rate`. Charts use observation dates; publication timestamps remain separate. Select an explicit chart date window when you need a period other than the API default. The chart reports pagination and assumed publication-time warnings; the corresponding research table retains every original row field and the full endpoint payload.
 
