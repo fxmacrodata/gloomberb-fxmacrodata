@@ -1,8 +1,8 @@
 # FXMacroData for Gloomberb
 
-Research macroeconomic conditions in Gloomberb with [FXMacroData](https://fxmacrodata.com/?utm_source=github&utm_medium=referral&utm_campaign=open_source_integrations&utm_content=gloomberb_readme): chart indicator histories, inspect upcoming releases and query market data in native research panes.
+Research macroeconomic conditions in Gloomberb with [FXMacroData](https://fxmacrodata.com/?utm_source=github&utm_medium=referral&utm_campaign=gloomberb-fxmacrodata&utm_content=readme): chart indicator histories, inspect upcoming releases and query market data in native research panes.
 
-[Subscribe to FXMacroData](https://fxmacrodata.com/subscribe?utm_source=github&utm_medium=referral&utm_campaign=open_source_integrations&utm_content=gloomberb_subscribe) for non-USD data, full available history, FX, commodities and positioning. Use the public USD workflow to evaluate the integration before connecting your subscription.
+[Subscribe to FXMacroData](https://fxmacrodata.com/subscribe?utm_source=github&utm_medium=referral&utm_campaign=gloomberb-fxmacrodata&utm_content=subscribe) for non-USD data, full available history, FX, commodities and positioning. Use the public USD workflow to evaluate the integration before connecting your subscription.
 
 Evaluate the plugin with the public USD catalogue, recent indicator history and release calendar without an API key. Connect your subscription when you need protected datasets or full available history.
 
@@ -44,7 +44,7 @@ For CLI/TUI use, provide your own key through the process environment variable `
 
 The client uses FXMacroData's documented authentication inside its transport, refuses redirects, and returns sanitized errors. It adds no analytics requests. Website links carry campaign parameters; API and MCP request URLs carry no campaign parameters.
 
-See the [API reference](https://fxmacrodata.com/documentation/reference?utm_source=github&utm_medium=referral&utm_campaign=open_source_integrations&utm_content=gloomberb_docs) for units, access requirements and pagination. Market consensus, official projections and FXMacroData-generated predictions retain their original labels.
+See the [API reference](https://fxmacrodata.com/documentation/reference?utm_source=github&utm_medium=referral&utm_campaign=gloomberb-fxmacrodata&utm_content=docs) for units, access requirements and pagination. Market consensus, official projections and FXMacroData-generated predictions retain their original labels.
 
 ## Development
 
